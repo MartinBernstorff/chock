@@ -19,14 +19,14 @@
 
         .clock-grid {
             display: grid;
-            grid-template-columns: repeat(4, 60px);
-            grid-template-rows: repeat(4, 60px);
+            grid-template-columns: repeat(8, 80px);
+            grid-template-rows: repeat(8, 80px);
             gap: 8px;
         }
 
         .square {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             background-color: #1a1a1a;
             transition: background-color 0.3s ease;
         }
@@ -42,18 +42,23 @@
 
     <script>
         function updateClock() {
-            const currentHour = new Date().getHours();
-            console.log(currentHour);
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentQuarterHours = currentHour * 4 + Math.floor(currentMinute / 15);
+
+            console.log(currentHour, currentMinute);
             const clockGrid = document.getElementById('clock');
             clockGrid.innerHTML = '';
 
-            // Create 16 squares for hours 9-24 (9am to midnight)
-            for (let i = 0; i < 16; i++) {
-                const hour = 8 + i;
+            // Create 64 squares for 16 hours starting at 8am
+            // Each square represents 15 minutes
+            for (let i = 0; i < 64; i++) {
+                const startQuarterHour = 6 * 4 + i + 1; // Starting at 8am (8*4 = 32 quarter-hours)
                 const square = document.createElement('div');
                 square.className = 'square';
 
-                if (currentHour >= hour - 1) {
+                if (currentQuarterHours >= startQuarterHour) {
                     square.classList.add('on');
                 }
 
