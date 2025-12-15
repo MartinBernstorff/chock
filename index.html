@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hour Clock</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 60px);
+            grid-template-rows: repeat(4, 60px);
+            gap: 8px;
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            background-color: #1a1a1a;
+            transition: background-color 0.3s ease;
+        }
+
+        .square.on {
+            background-color: #333333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock-grid" id="clock"></div>
+
+    <script>
+        function updateClock() {
+            const currentHour = new Date().getHours();
+            console.log(currentHour);
+            const clockGrid = document.getElementById('clock');
+            clockGrid.innerHTML = '';
+
+            // Create 16 squares for hours 9-24 (9am to midnight)
+            for (let i = 0; i < 16; i++) {
+                const hour = 8 + i;
+                const square = document.createElement('div');
+                square.className = 'square';
+
+                if (currentHour >= hour - 1) {
+                    square.classList.add('on');
+                }
+
+                clockGrid.appendChild(square);
+            }
+        }
+
+        // Update immediately
+        updateClock();
+
+        // Update every minute
+        setInterval(updateClock, 60000);
+    </script>
+</body>
+
+</html>
