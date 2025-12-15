@@ -19,15 +19,15 @@
 
         .clock-grid {
             display: grid;
-            grid-template-columns: repeat(8, 40px);
-            grid-template-rows: repeat(8, 40px);
+            grid-template-columns: repeat(6, 40px);
+            grid-template-rows: repeat(9, 40px);
             gap: 8px;
         }
 
         .square {
             width: 40px;
             height: 40px;
-            background-color: #560000;
+            background-color: #1a1a1a;
             transition: background-color 0.3s ease;
         }
 
@@ -53,8 +53,8 @@
 
             // Create 64 squares for 16 hours starting at 8am
             // Each square represents 15 minutes
-            for (let i = 0; i < 64; i++) {
-                const startQuarterHour = 6 * 4 + i + 1; // Starting at 8am (8*4 = 32 quarter-hours)
+            for (let i = 0; i < 66; i++) {
+                const startQuarterHour = 6 * 4 + i - 1; // Starting at 8am (8*4 = 32 quarter-hours)
                 const square = document.createElement('div');
                 square.className = 'square';
 
